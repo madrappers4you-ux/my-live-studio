@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Live Studio</title>
+<style>
+:root{--bg:#071326;--panel:#10213b;--panel2:#142b4b;--text:#f4f8ff;--muted:#a9bdd9;--blue:#63c5ff;--gold:#ffd27d;--line:#29415f}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(140deg,#071326,#0a2343 65%,#102d4b);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
+main{max-width:1050px;margin:auto;padding:22px}header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 0 22px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:15px;background:linear-gradient(135deg,#63c5ff,#4365ff);display:grid;place-items:center;font-size:24px}
+h1{font-size:clamp(23px,5vw,34px);margin:0}p{color:var(--muted);line-height:1.55}.pill{border:1px solid #436181;border-radius:99px;padding:7px 12px;color:#c5e8ff;font-size:12px}
+.hero,.card{background:#10213bdc;border:1px solid var(--line);border-radius:20px;padding:20px;margin-bottom:16px;box-shadow:0 14px 40px #0002}
+.hero{background:linear-gradient(120deg,#143a63,#10213b 72%)}.hero h2{font-size:clamp(22px,4vw,30px);margin:4px 0}.eyebrow{color:var(--blue);font-weight:700;font-size:12px;letter-spacing:1.4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:15px}.tile{padding:17px;border-radius:16px;background:var(--panel2);border:1px solid #2d4c70}.tile .emoji{font-size:28px}.tile h3{margin:9px 0 3px}.tile p{font-size:13px;margin:4px 0}
+label{display:block;margin:13px 0 6px;font-weight:650;font-size:14px}input,textarea,select{width:100%;padding:12px;border-radius:11px;border:1px solid #3a5577;background:#09192d;color:white;font:inherit}textarea{min-height:100px;resize:vertical}
+button,.button{border:0;border-radius:12px;padding:12px 16px;font:inherit;font-weight:750;cursor:pointer;background:linear-gradient(135deg,#73d0ff,#6488ff);color:#071326;text-decoration:none;display:inline-block;margin-top:12px}
+.secondary{background:#1c3555;color:#eaf5ff;border:1px solid #3a5577}.actions{display:flex;gap:10px;flex-wrap:wrap}.note{font-size:13px;background:#352c18;border:1px solid #725b2b;color:#ffe3a8;border-radius:12px;padding:12px}.status{color:#ffd27d;font-weight:700}.small{font-size:12px;color:var(--muted)}footer{text-align:center;padding:20px;color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="brand"><div class="logo">♫</div><div><h1>My Live Studio</h1><p style="margin:2px 0">Your Music • Your Channel</p></div></div>
+  <span class="pill">STARTER DASHBOARD</span>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">WELCOME TO YOUR STUDIO</div>
+  <h2>Apni Live Stream, Apne Style Mein</h2>
+  <p>90s ke evergreen songs aur devotional bhajans ke liye ek jagah se planning karo.</p>
+  <div class="actions">
+    <a class="button" href="#planner">Live Details Taiyar Karo</a>
+    <a class="button secondary" href="https://studio.youtube.com/" target="_blank" rel="noopener">YouTube Studio Kholo ↗</a>
+  </div>
+</section>
+
+<section class="grid">
+  <div class="tile"><div class="emoji">🎶</div><h3>Sadabahar 90s Songs</h3><p>Romantic classics aur radio-style stream planning.</p><button class="secondary" onclick="preset('90s')">90s preset chuno</button></div>
+  <div class="tile"><div class="emoji">🙏</div><h3>Morning Bhajan</h3><p>Radhe Radhe, Shree Ram aur devotional music.</p><button class="secondary" onclick="preset('bhajan')">Bhajan preset chuno</button></div>
+  <div class="tile"><div class="emoji">📅</div><h3>Stream Planner</h3><p>Title, description aur planned start time taiyar karo.</p><button class="secondary" onclick="document.querySelector('#planner').scrollIntoView({behavior:'smooth'})">Planner kholo</button></div>
+</section>
+
+<section class="card" id="planner">
+  <div class="eyebrow">STREAM PLANNER</div><h2>Apni Live Details</h2>
+  <label for="category">Stream category</label>
+  <select id="category" onchange="applyPreset()"><option value="90s">Sadabahar 90s Songs</option><option value="bhajan">Morning Bhajan</option><option value="custom">Custom Stream</option></select>
+  <label for="title">Live title</label><input id="title" value="Sadabahar 90s Song Radio Live ❤️ | Evergreen Hindi Songs">
+  <label for="desc">Description</label><textarea id="desc">Welcome to our music live stream! Enjoy evergreen Hindi songs and beautiful melodies. Listen, relax, and enjoy the music.
+
+Subscribe for more music streams and updates.
+
+Note: Stream only audio/video that you own or have permission to broadcast.</textarea>
+  <label for="start">Planned start time (optional)</label><input id="start" type="datetime-local">
+  <div class="actions"><button onclick="copyDetails()">Title + Description Copy Karo</button><button class="secondary" onclick="downloadDetails()">Details Download Karo</button></div>
+  <p id="feedback" class="small" aria-live="polite">Details abhi sirf is browser page mein hain; YouTube par publish nahi hui hain.</p>
+</section>
+
+<section class="card">
+  <div class="eyebrow">AUTOMATION STATUS</div><h2>Auto-streaming abhi setup nahi hai</h2>
+  <p>Yeh starter website planning dashboard hai. Asli automatic stream ke liye YouTube authorization, ek streaming engine/encoder, audio-video source, aur schedule/recovery setup alag se configure karna hoga.</p>
+  <div class="note">Zaroori: copyrighted film songs ko bina required rights/permission ke stream karne par Content ID claim, block ya strike aa sakti hai. Apne ya licensed audio/video ka hi istemal karein.</div>
+  <div class="actions"><a class="button secondary" href="https://developers.google.com/youtube/data/live/getting-started" target="_blank" rel="noopener">Official YouTube Live API Guide ↗</a></div>
+</section>
+<footer>My Live Studio • Free starter website • Demo only, not connected to YouTube yet</footer>
+</main>
+<script>
+function preset(type){
+ document.getElementById('category').value=type; applyPreset();
+ document.getElementById('planner').scrollIntoView({behavior:'smooth'});
+}
+function applyPreset(){
+ const c=document.getElementById('category').value;
+ if(c==='90s'){
+  document.getElementById('title').value='Sadabahar 90s Song Radio Live ❤️ | Evergreen Hindi Songs';
+  document.getElementById('desc').value='Welcome to Sadabahar 90s Song Radio Live! Enjoy evergreen Hindi melodies and nostalgic romantic songs.\\n\\nSubscribe for more music streams and updates.\\n\\nNote: Stream only audio/video that you own or have permission to broadcast.';
+ } else if(c==='bhajan'){
+  document.getElementById('title').value='Morning Bhajan Live 🙏 | Radhe Radhe • Shree Ram';
+  document.getElementById('desc').value='Welcome to Morning Bhajan Live. Join us for devotional music, Radhe Radhe, Shree Ram and peaceful bhajans.\\n\\nSubscribe for more devotional streams.\\n\\nNote: Stream only audio/video that you own or have permission to broadcast.';
+ }
+}
+function getDetails(){return 'TITLE\\n'+document.getElementById('title').value+'\\n\\nDESCRIPTION\\n'+document.getElementById('desc').value+'\\n\\nPLANNED START\\n'+(document.getElementById('start').value||'Not set');}
+async function copyDetails(){
+ try{await navigator.clipboard.writeText(getDetails());document.getElementById('feedback').textContent='Details copy ho gayi hain. YouTube Studio mein paste kar sakte hain.';}
+ catch(e){document.getElementById('feedback').textContent='Copy permission nahi mili. Details ko select karke manually copy karein.';}
+}
+function downloadDetails(){
+ const blob=new Blob([getDetails()],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='my-live-stream-details.txt';a.click();URL.revokeObjectURL(a.href);
+ document.getElementById('feedback').textContent='Details ki text file download ke liye taiyar hai.';
+}
+</script>
+</body>
+</html>
